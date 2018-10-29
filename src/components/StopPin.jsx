@@ -7,20 +7,19 @@ export default class StopPin extends Component {
     super(props)
   }
 
-  onClick(e) {
-    console.log(e.target)
-    e.target.innerText = e.target.getAttribute('stopname')
-    setTimeout(function () { e.target.innerText = '🚏' }, 1000)
+  onClick = (e) => {
+    this.props.changeSelected(this.props.id)
   }
 
   render() {
-
     return (
-      <div className="StopPin container" onClick={this.onClick} stopName={this.props.text.replace(/\(\d*\)/, '')}>
+      <div className="StopPin container" onClick={this.onClick} stopname={this.props.text.replace(/\(\d*\)/, '')}>
         🚏
-        <span className="stopName">{this.props.text.replace(/\(\d*\)/, '')}</span>
+        {this.props.selected ? <div className="stopName"> {this.props.text.replace(/\(\d*\)/, '')}</div>: ''}
       </div>
     );
   }
 
 }
+
+//

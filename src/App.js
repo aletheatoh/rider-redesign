@@ -6,7 +6,8 @@ import NearestStopList from './components/NearestStopList.jsx'
 import StopPin from './components/StopPin.jsx'
 import TranslocAgency from './transloc.js'
 import { stops } from './stops.js'
-
+import {geolocated} from 'react-geolocated';
+import LocationPin from './components/LocationPin.jsx'
 class App extends Component {
 
   // state = {}
@@ -14,6 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {agency: new TranslocAgency(176)}
+    console.log(navigator.geolocation)
+    this.watch = navigator.geolocation.watchPosition(this.locationSuccess, this.locationError)
   }
 
   static defaultProps = {
@@ -29,15 +32,42 @@ class App extends Component {
   }
 
   getStops = () => {
-    console.log(stops)
     return stops
-    // let stops = await this.state.agency.getStops()
+    // let stops =  this.state.agency.getStops()
     // console.log(stops)
     // stops = stops['stops'].map((s) => {return {name: s.name, lat: s.position[0], lng: s.position[1]};})
     // return ['West Campus Chapel']
   }
 
+  locationSuccess = (l) => {
+    console.log('succ', l)
+    this.setState({currentLocation: [l.coords.latitude, l.coords.longitude]})
+  }
+
+  locationError = (l) => {
+    console.log(l)
+  }
+
+  changeSelected = (id) => {
+    this.setState({selected: id})
+  }
+
+  getRenderStops = () => {
+    return this.getStops().map((s) => {
+      return <StopPin
+        selected={s.id === this.state.selected}
+        lat={s.lat}
+        lng={s.lng}
+        text={s.name || ''}
+        changeSelected={this.changeSelected}
+        code = {s.code}
+        id = {s.id}
+        key={s.id+s.code}
+      />})
+  }
+
   render() {
+
     return (
       <div className="App">
 
@@ -51,7 +81,12 @@ class App extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-          {this.getStops().map((s) => <StopPin key={s.name} lat={s.lat} lng={s.lng} text={s.name}/>)}
+          {this.getRenderStops()}
+          {this.state.currentLocation ?
+            <LocationPin
+              lat={this.state.currentLocation[0]}
+              lng={this.state.currentLocation[1]}
+            /> : null}
         </GoogleMapReact>
       </div>
       </div>

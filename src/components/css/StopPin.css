@@ -3,9 +3,16 @@
 }
 
 .stopName {
-  font-size: 0px;
+  font-size: 12px;
+  border-radius: 3px;
+  border-style: solid;
+  /* width: 60px; */
+  border-width: 1px;
+  padding: 1px;
+  display: inline-block
 }
 
 .stopName:hover {
   font-size: 10px;
+
 }
