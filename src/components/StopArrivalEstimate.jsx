@@ -6,9 +6,10 @@ import './css/StopArrivalEstimate.css';
 export default class StopArrivalEstimate extends Component {
   render() {
     return (
-      <div className="StopArrivalEstimate container">
-        <span>{this.props.stop}</span>
-      </div>
+      <tr className="StopArrivalEstimateRow container">
+        <td className="distance">{this.props.dist + 'm'}</td>
+        <td className="stopNameEstimate">{this.props.stop.name.replace(/\(\d*\)/, '')}</td>
+      </tr>
     );
   }
 

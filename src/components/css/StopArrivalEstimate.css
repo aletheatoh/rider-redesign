@@ -1,0 +1,13 @@
+.distance {
+  font-size: 30px;
+  width: 30%;
+}
+
+.StopArrivalEstimateRow {
+  margin: 20px;
+  vertical-align: middle;
+}
+
+.stopNameEstimate {
+  vertical-align: middle !important;
+}

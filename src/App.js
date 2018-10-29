@@ -8,6 +8,7 @@ import TranslocAgency from './transloc.js'
 import { stops } from './stops.js'
 import {geolocated} from 'react-geolocated';
 import LocationPin from './components/LocationPin.jsx'
+
 class App extends Component {
 
   // state = {}
@@ -81,14 +82,21 @@ class App extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-          {this.getRenderStops()}
-          {this.state.currentLocation ?
-            <LocationPin
-              lat={this.state.currentLocation[0]}
-              lng={this.state.currentLocation[1]}
-            /> : null}
-        </GoogleMapReact>
-      </div>
+            {this.getRenderStops()}
+            {this.state.currentLocation ?
+              <LocationPin
+                lat={this.state.currentLocation[0]}
+                lng={this.state.currentLocation[1]}
+              /> : null}
+          </GoogleMapReact>
+        </div>
+        {this.state.currentLocation ?
+          <NearestStopList
+            stops={stops}
+            lat={this.state.currentLocation[0]}
+            lng={this.state.currentLocation[1]}
+          /> : ''
+        }
       </div>
     );
   }
