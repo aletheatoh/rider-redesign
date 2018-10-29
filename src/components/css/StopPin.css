@@ -1,0 +1,11 @@
+.StopPin {
+  font-size: 30px;
+}
+
+.stopName {
+  font-size: 0px;
+}
+
+.stopName:hover {
+  font-size: 10px;
+}
