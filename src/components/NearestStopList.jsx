@@ -8,7 +8,7 @@ export default class NearestStopList extends Component {
     let stopDistances = stops.map((s) =>
       {return {...s, dist: this.getDistanceToLocation(s)}}
     )
-    return stopDistances.sort((s1, s2) => {return s1.dist - s2.dist}).slice(0,3)
+    return stopDistances.sort((s1, s2) => {return s1.dist - s2.dist}).slice(0, this.props.selected ? 2 : 3)
   }
 
   getDistanceToLocation = (stop1) => {
@@ -18,12 +18,17 @@ export default class NearestStopList extends Component {
         {latitude: stop1.lat, longitude: stop1.lng}))
   }
   render() {
+    let s = this.props.selected
     return (
       <div className="NearestStopList container">
         <table className="table">
-          {this.getNearestStops(this.props.stops, this.props.lat, this.props.lng).map(
-            s => <StopArrivalEstimate key={s.id} stop={s} dist={s.dist}/>
-          )}
+          <tbody>
+            {s ?
+              <StopArrivalEstimate setMode={this.props.setMode} selected={true} key={s.id} stop={s} dist={this.getDistanceToLocation(s)} agency={this.props.agency}/> : ''}
+            {this.getNearestStops(this.props.stops, this.props.lat, this.props.lng).filter((a) => {return s && a.id !== s.id}).map(
+              s => <StopArrivalEstimate setMode={this.props.setMode} selected={false} key={s.id} stop={s} dist={s.dist} agency={this.props.agency}/>
+            )}
+          </tbody>
         </table>
       </div>
     );

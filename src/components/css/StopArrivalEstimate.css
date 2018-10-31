@@ -1,13 +1,26 @@
 .distance {
-  font-size: 30px;
-  width: 30%;
+  font-size: 24px;
+  width: 15%;
 }
 
 .StopArrivalEstimateRow {
   margin: 20px;
   vertical-align: middle;
+  padding: 0.7rem;
+  width: 100px;
 }
 
 .stopNameEstimate {
   vertical-align: middle !important;
+  /* overflow-x: scroll; */
+  width: 85%;
+}
+
+.highlighted {
+  background-color: #e3e4e1;
+}
+
+.BusCodes {
+  /* overflow-y: hidden; */
+  /* width: 100%; */
 }
