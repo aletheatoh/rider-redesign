@@ -1,0 +1,19 @@
+.LocationPin {
+  background-color: white;
+  border-radius: 19px;
+  height: 30px;
+  width: 30px;
+  padding: 6px;
+  border-color:	#4a80f5;
+  border-style: solid;
+  border-width: thin;
+}
+
+.innerDot {
+  /* margin: 1px; */
+  box-sizing: unset;
+  background-color:	#4a80f5;
+  border-radius: 8px;
+  height: 16px;
+  width: 16px;
+}
